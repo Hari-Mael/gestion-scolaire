@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ESCATO Teacher Registration</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link id="dynamic-favicon" rel="icon" type="image/png" href="" />
+</head>
+<body>
+  <div id="login-section">
+    <h2>Admin Login</h2>
+    <form id="login-form">
+      <input type="password" id="admin-password" placeholder="Enter password" required />
+      <button type="submit">Login</button>
+      <div id="login-error" class="error"></div>
+    </form>
+  </div>
+
+  <div id="app-section" style="display:none;">
+    <div id="school-header">
+      <div style="display:flex;align-items:center;">
+        <img id="school-logo" src="" alt="School Logo" />
+        <div style="margin-left:16px;">
+          <label for="logo-file" style="font-size:0.9em;">Change School Logo:</label>
+          <input type="file" id="logo-file" accept="image/*" style="margin-left:8px;" />
+        </div>
+      </div>
+      <h1>ESCATO Teacher Registration</h1>
+      <!-- New extra photo upload field below the title -->
+      <div style="margin: 12px 0;">
+        <label for="extra-photo-file" style="font-size:0.95em;">Import Photo:</label>
+        <input type="file" id="extra-photo-file" accept="image/*" />
+        <img id="extra-photo-preview" src="" alt="Extra Photo Preview" style="display:none; width:80px; height:80px; margin-left:8px; vertical-align:middle;"/>
+      </div>
+      <button id="logout-btn">Logout</button>
+    </div>
+
+    <!-- Add/Edit Teacher Form -->
+    <h2 id="form-title">Add Teacher</h2>
+    <form id="teacher-form">
+      <input type="hidden" id="teacher-id" />
+      <label>Identity Number: <input type="text" id="identity-number" required /></label><br />
+      <label>N° CNaPS: <input type="text" id="cnaps-number" /></label><br />
+      <label>N° Mle: <input type="text" id="mle-number" /></label><br />
+      <label>Name: <input type="text" id="name" required /></label><br />
+      <label>Subject: <input type="text" id="subject" required /></label><br />
+      <label>Contact: <input type="text" id="contact" required /></label><br />
+      <label>Email: <input type="email" id="email" required /></label><br />
+      <label>N+Date of Birth: <input type="date" id="dob" required /></label><br />
+      <label>Place of Birth: <input type="text" id="place-of-birth" /></label><br />
+      <label>Number of Children: <input type="number" min="0" id="number-of-children" /></label><br />
+      <label>Marital Status:
+        <select id="marital-status">
+          <option value="">--Select--</option>
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+          <option value="Widowed">Widowed</option>
+          <option value="Divorced">Divorced</option>
+          <option value="Separated">Separated</option>
+        </select>
+      </label><br />
+      <label>Hiring Date: <input type="date" id="hiring-date" /></label><br />
+      <label>Debauchery Date: <input type="date" id="debauchery-date" /></label><br />
+      <label>Occupation: <input type="text" id="occupation" /></label><br />
+      <label>Permanent/Temporary:
+        <select id="employment-type">
+          <option value="">--Select--</option>
+          <option value="Permanent">Permanent</option>
+          <option value="Temporary">Temporary</option>
+        </select>
+      </label><br />
+      <label>Address: <input type="text" id="address" /></label><br />
+      <label>Religion: <input type="text" id="religion" /></label><br />
+      <label>Comment:<br />
+        <textarea id="comment" rows="2" cols="30"></textarea>
+      </label><br />
+      <label>Photo: <input type="file" id="photo" accept="image/*" /></label><br />
+      <img id="preview" src="" alt="Photo Preview" style="display:none; width:80px; height:80px;"/><br />
+      <button type="submit">Save</button>
+      <button type="button" id="cancel-edit" style="display:none;">Cancel</button>
+    </form>
+
+    <!-- Teacher Search -->
+    <div id="search-section">
+      <label>Search Teacher: <input type="text" id="search-teacher" placeholder="Search by any field..." /></label>
+    </div>
+
+    <!-- Print teacher list -->
+    <button id="print-teacher-list" class="print-btn">Print Teacher List</button>
+
+    <!-- Teacher List -->
+    <h2>Registered Teachers</h2>
+    <table id="teacher-table" border="1" cellpadding="5">
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Identity Number</th>
+          <th>N° CNaPS</th>
+          <th>N° Mle</th>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Contact</th>
+          <th>Email</th>
+          <th>N+Date of Birth</th>
+          <th>Place of Birth</th>
+          <th>Number of Children</th>
+          <th>Marital Status</th>
+          <th>Hiring Date</th>
+          <th>Debauchery Date</th>
+          <th>Occupation</th>
+          <th>Perm/Temp</th>
+          <th>Address</th>
+          <th>Religion</th>
+          <th>Comment</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- Printable Teacher Info Modal -->
+  <div id="print-modal-bg" style="display:none;">
+    <div id="print-modal">
+      <button id="close-print-modal">X</button>
+      <div id="print-content"></div>
+      <button id="print-teacher-info" class="print-btn">Print This Teacher</button>
+      <button id="print-certificate" class="print-btn">Print Work Certificate</button>
+      <button id="print-permission" class="print-btn">Print Permission Letter</button>
+    </div>
+  </div>
+
+  <!-- Teacher Detail Modal (new window/popup) -->
+  <div id="teacher-detail-bg" style="display:none;">
+    <div id="teacher-detail-modal">
+      <button id="close-teacher-detail">X</button>
+      <div id="teacher-detail-content"></div>
+    </div>
+  </div>
+
+  <!-- Hidden print section for teacher list -->
+  <div id="print-list-section" style="display:none;">
+    <div id="print-list-content"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
