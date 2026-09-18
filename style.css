@@ -1,0 +1,186 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 30px;
+  background: #f5f7fa;
+}
+
+#school-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+#school-header > div {
+  display: flex;
+  align-items: center;
+}
+
+#school-logo {
+  width: 80px;
+  height: 80px;
+  margin-right: 8px;
+  border-radius: 8px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+h1, h2 {
+  color: #2a4365;
+}
+
+form {
+  margin-bottom: 20px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  max-width: 400px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+textarea,
+select {
+  width: 90%;
+  padding: 6px;
+  margin: 6px 0;
+  border: 1px solid #b3b3b3;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+input[type="file"] {
+  margin: 6px 0;
+}
+
+button {
+  margin: 6px 4px 6px 0;
+  padding: 7px 14px;
+  background: #2a4365;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button#logout-btn {
+  background: #e53e3e;
+  float: right;
+}
+
+button.print-btn {
+  background: #3182ce;
+  margin-bottom: 10px;
+}
+button.print-btn:hover {
+  background: #2b6cb0;
+}
+
+button:hover {
+  background: #24345c;
+}
+
+table {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  margin-top: 10px;
+  font-size: 0.95em;
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+}
+
+td.teacher-name {
+  color: #2a4365;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
+  background: #f0f6fc;
+}
+
+img {
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+#error, .error {
+  color: #e53e3e;
+  margin-top: 6px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+#print-modal-bg, #teacher-detail-bg {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.2);
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#print-modal, #teacher-detail-modal {
+  background: #fff;
+  border-radius: 10px;
+  padding: 24px 24px 16px 24px;
+  max-width: 540px;
+  min-width: 320px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.09);
+  position: relative;
+}
+#print-modal button#print-teacher-info,
+#print-modal button#print-certificate,
+#print-modal button#print-permission {
+  margin-top: 12px;
+}
+#print-modal #close-print-modal,
+#teacher-detail-modal #close-teacher-detail {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: #e53e3e;
+  color: #fff;
+  border-radius: 50%;
+  border: none;
+  width: 24px;
+  height: 24px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2;
+}
+
+#search-section {
+  margin-bottom: 8px;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #print-content, #print-list-content, #print-content * , #print-list-content * {
+    visibility: visible !important;
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  #print-content, #print-list-content {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100vw;
+    background: #fff;
+    z-index: 1000;
+    box-shadow: none;
+  }
+}
+
