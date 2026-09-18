@@ -2,148 +2,269 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ESCATO Teacher Registration</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
   <link id="dynamic-favicon" rel="icon" type="image/png" href="" />
 </head>
 <body>
   <div id="login-section">
+    <div class="login-brand">ESCATO Teacher Registration</div>
     <h2>Admin Login</h2>
     <form id="login-form">
-      <input type="password" id="admin-password" placeholder="Enter password" required />
-      <button type="submit">Login</button>
-      <div id="login-error" class="error"></div>
+      <div class="field">
+        <label for="admin-password">Password</label>
+        <input type="password" id="admin-password" placeholder="Enter password" autocomplete="current-password" required />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Login</button>
+      <div id="login-error" class="error" role="alert"></div>
     </form>
   </div>
 
   <div id="app-section" style="display:none;">
-    <div id="school-header">
-      <div style="display:flex;align-items:center;">
-        <img id="school-logo" src="" alt="School Logo" />
-        <div style="margin-left:16px;">
-          <label for="logo-file" style="font-size:0.9em;">Change School Logo:</label>
-          <input type="file" id="logo-file" accept="image/*" style="margin-left:8px;" />
+    <header id="school-header" class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <img id="school-logo" src="" alt="School Logo" />
+          <span class="brand-mark" aria-hidden="true">E</span>
+          <h1>ESCATO Teacher Registration</h1>
+        </div>
+        <div class="topbar-actions">
+          <details class="settings">
+            <summary>School settings</summary>
+            <div class="settings-panel">
+              <div class="field">
+                <label for="logo-file">Change School Logo</label>
+                <input type="file" id="logo-file" accept="image/*" />
+              </div>
+              <div class="field">
+                <label for="extra-photo-file">Import Photo</label>
+                <div class="photo-field">
+                  <input type="file" id="extra-photo-file" accept="image/*" />
+                  <img id="extra-photo-preview" class="preview" src="" alt="Extra Photo Preview" style="display:none;" />
+                </div>
+              </div>
+            </div>
+          </details>
+          <button id="logout-btn" class="btn btn-light" type="button">Logout</button>
         </div>
       </div>
-      <h1>ESCATO Teacher Registration</h1>
-      <!-- New extra photo upload field below the title -->
-      <div style="margin: 12px 0;">
-        <label for="extra-photo-file" style="font-size:0.95em;">Import Photo:</label>
-        <input type="file" id="extra-photo-file" accept="image/*" />
-        <img id="extra-photo-preview" src="" alt="Extra Photo Preview" style="display:none; width:80px; height:80px; margin-left:8px; vertical-align:middle;"/>
-      </div>
-      <button id="logout-btn">Logout</button>
-    </div>
+    </header>
 
-    <!-- Add/Edit Teacher Form -->
-    <h2 id="form-title">Add Teacher</h2>
-    <form id="teacher-form">
-      <input type="hidden" id="teacher-id" />
-      <label>Identity Number: <input type="text" id="identity-number" required /></label><br />
-      <label>N° CNaPS: <input type="text" id="cnaps-number" /></label><br />
-      <label>N° Mle: <input type="text" id="mle-number" /></label><br />
-      <label>Name: <input type="text" id="name" required /></label><br />
-      <label>Subject: <input type="text" id="subject" required /></label><br />
-      <label>Contact: <input type="text" id="contact" required /></label><br />
-      <label>Email: <input type="email" id="email" required /></label><br />
-      <label>N+Date of Birth: <input type="date" id="dob" required /></label><br />
-      <label>Place of Birth: <input type="text" id="place-of-birth" /></label><br />
-      <label>Number of Children: <input type="number" min="0" id="number-of-children" /></label><br />
-      <label>Marital Status:
-        <select id="marital-status">
-          <option value="">--Select--</option>
-          <option value="Single">Single</option>
-          <option value="Married">Married</option>
-          <option value="Widowed">Widowed</option>
-          <option value="Divorced">Divorced</option>
-          <option value="Separated">Separated</option>
-        </select>
-      </label><br />
-      <label>Hiring Date: <input type="date" id="hiring-date" /></label><br />
-      <label>Debauchery Date: <input type="date" id="debauchery-date" /></label><br />
-      <label>Occupation: <input type="text" id="occupation" /></label><br />
-      <label>Permanent/Temporary:
-        <select id="employment-type">
-          <option value="">--Select--</option>
-          <option value="Permanent">Permanent</option>
-          <option value="Temporary">Temporary</option>
-        </select>
-      </label><br />
-      <label>Address: <input type="text" id="address" /></label><br />
-      <label>Religion: <input type="text" id="religion" /></label><br />
-      <label>Comment:<br />
-        <textarea id="comment" rows="2" cols="30"></textarea>
-      </label><br />
-      <label>Photo: <input type="file" id="photo" accept="image/*" /></label><br />
-      <img id="preview" src="" alt="Photo Preview" style="display:none; width:80px; height:80px;"/><br />
-      <button type="submit">Save</button>
-      <button type="button" id="cancel-edit" style="display:none;">Cancel</button>
-    </form>
+    <main class="page">
+      <section id="form-panel" class="panel">
+        <h2 id="form-title">Add Teacher</h2>
+        <form id="teacher-form">
+          <div class="group" role="group" aria-labelledby="group-identity">
+            <h3 id="group-identity">Identity</h3>
+            <div class="fields">
+              <div class="field span-2">
+                <label for="name" class="req">Name</label>
+                <input type="text" id="name" required />
+              </div>
+              <div class="field">
+                <label for="identity-number" class="req">Identity Number</label>
+                <input type="text" id="identity-number" required />
+              </div>
+              <div class="field">
+                <label for="cnaps-number">N° CNaPS</label>
+                <input type="text" id="cnaps-number" />
+              </div>
+              <div class="field">
+                <label for="mle-number">N° Mle</label>
+                <input type="text" id="mle-number" />
+              </div>
+              <div class="field full">
+                <label for="photo">Photo</label>
+                <div class="photo-field">
+                  <input type="file" id="photo" accept="image/*" />
+                  <img id="preview" class="preview" src="" alt="Photo Preview" style="display:none;" />
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <!-- Teacher Search -->
-    <div id="search-section">
-      <label>Search Teacher: <input type="text" id="search-teacher" placeholder="Search by any field..." /></label>
-    </div>
+          <div class="group" role="group" aria-labelledby="group-contact">
+            <h3 id="group-contact">Contact</h3>
+            <div class="fields">
+              <div class="field">
+                <label for="contact" class="req">Contact</label>
+                <input type="text" id="contact" required />
+              </div>
+              <div class="field span-2">
+                <label for="email" class="req">Email</label>
+                <input type="email" id="email" required />
+              </div>
+              <div class="field span-2">
+                <label for="address">Address</label>
+                <input type="text" id="address" />
+              </div>
+            </div>
+          </div>
 
-    <!-- Print teacher list -->
-    <button id="print-teacher-list" class="print-btn">Print Teacher List</button>
+          <div class="group" role="group" aria-labelledby="group-personal">
+            <h3 id="group-personal">Personal</h3>
+            <div class="fields">
+              <div class="field">
+                <label for="dob" class="req">N+Date of Birth</label>
+                <input type="date" id="dob" required />
+              </div>
+              <div class="field">
+                <label for="place-of-birth">Place of Birth</label>
+                <input type="text" id="place-of-birth" />
+              </div>
+              <div class="field">
+                <label for="number-of-children">Number of Children</label>
+                <input type="number" min="0" id="number-of-children" />
+              </div>
+              <div class="field">
+                <label for="marital-status">Marital Status</label>
+                <select id="marital-status">
+                  <option value="">--Select--</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                  <option value="Widowed">Widowed</option>
+                  <option value="Divorced">Divorced</option>
+                  <option value="Separated">Separated</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="religion">Religion</label>
+                <input type="text" id="religion" />
+              </div>
+            </div>
+          </div>
 
-    <!-- Teacher List -->
-    <h2>Registered Teachers</h2>
-    <table id="teacher-table" border="1" cellpadding="5">
-      <thead>
-        <tr>
-          <th>Photo</th>
-          <th>Identity Number</th>
-          <th>N° CNaPS</th>
-          <th>N° Mle</th>
-          <th>Name</th>
-          <th>Subject</th>
-          <th>Contact</th>
-          <th>Email</th>
-          <th>N+Date of Birth</th>
-          <th>Place of Birth</th>
-          <th>Number of Children</th>
-          <th>Marital Status</th>
-          <th>Hiring Date</th>
-          <th>Debauchery Date</th>
-          <th>Occupation</th>
-          <th>Perm/Temp</th>
-          <th>Address</th>
-          <th>Religion</th>
-          <th>Comment</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+          <div class="group" role="group" aria-labelledby="group-employment">
+            <h3 id="group-employment">Employment</h3>
+            <div class="fields">
+              <div class="field">
+                <label for="subject" class="req">Subject</label>
+                <input type="text" id="subject" required />
+              </div>
+              <div class="field">
+                <label for="occupation">Occupation</label>
+                <input type="text" id="occupation" />
+              </div>
+              <div class="field">
+                <label for="employment-type">Permanent/Temporary</label>
+                <select id="employment-type">
+                  <option value="">--Select--</option>
+                  <option value="Permanent">Permanent</option>
+                  <option value="Temporary">Temporary</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="hiring-date">Hiring Date</label>
+                <input type="date" id="hiring-date" />
+              </div>
+              <div class="field">
+                <label for="debauchery-date">Debauchery Date</label>
+                <input type="date" id="debauchery-date" />
+              </div>
+            </div>
+          </div>
+
+          <div class="group" role="group" aria-labelledby="group-notes">
+            <h3 id="group-notes">Notes</h3>
+            <div class="fields">
+              <div class="field full">
+                <label for="comment">Comment</label>
+                <textarea id="comment" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <input type="hidden" id="teacher-id" />
+          <div class="form-actions">
+            <button type="button" id="cancel-edit" class="btn btn-secondary" hidden>Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="list-section">
+        <div class="toolbar">
+          <div class="toolbar-title">
+            <h2>Registered Teachers</h2>
+            <span id="teacher-count" class="count"></span>
+          </div>
+          <div class="toolbar-actions">
+            <input type="search" id="search-teacher" placeholder="Search by any field..." aria-label="Search Teacher" />
+            <button id="print-teacher-list" class="btn btn-secondary" type="button">Print Teacher List</button>
+          </div>
+        </div>
+
+        <div id="table-wrap" class="table-wrap">
+          <table id="teacher-table">
+            <thead>
+              <tr>
+                <th scope="col">Teacher</th>
+                <th scope="col">Identity Number</th>
+                <th scope="col">N° CNaPS</th>
+                <th scope="col">N° Mle</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Email</th>
+                <th scope="col">N+Date of Birth</th>
+                <th scope="col">Place of Birth</th>
+                <th scope="col" class="num">Children</th>
+                <th scope="col">Marital Status</th>
+                <th scope="col">Hiring Date</th>
+                <th scope="col">Debauchery Date</th>
+                <th scope="col">Occupation</th>
+                <th scope="col">Perm/Temp</th>
+                <th scope="col">Address</th>
+                <th scope="col">Religion</th>
+                <th scope="col">Comment</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div id="empty-state" class="empty" hidden>
+          <p id="empty-title" class="empty-title"></p>
+          <p id="empty-hint" class="empty-hint"></p>
+        </div>
+      </section>
+    </main>
   </div>
 
-  <!-- Printable Teacher Info Modal -->
   <div id="print-modal-bg" style="display:none;">
-    <div id="print-modal">
-      <button id="close-print-modal">X</button>
-      <div id="print-content"></div>
-      <button id="print-teacher-info" class="print-btn">Print This Teacher</button>
-      <button id="print-certificate" class="print-btn">Print Work Certificate</button>
-      <button id="print-permission" class="print-btn">Print Permission Letter</button>
+    <div id="print-modal" role="dialog" aria-modal="true" aria-labelledby="print-modal-title">
+      <div class="modal-head">
+        <h2 id="print-modal-title">Print preview</h2>
+        <button id="close-print-modal" class="icon-btn" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body canvas">
+        <div id="print-content" class="paper"></div>
+      </div>
+      <div class="modal-foot">
+        <button id="print-teacher-info" class="btn btn-secondary print-btn" type="button">Print This Teacher</button>
+        <button id="print-certificate" class="btn btn-secondary print-btn" type="button">Print Work Certificate</button>
+        <button id="print-permission" class="btn btn-secondary print-btn" type="button">Print Permission Letter</button>
+      </div>
     </div>
   </div>
 
-  <!-- Teacher Detail Modal (new window/popup) -->
   <div id="teacher-detail-bg" style="display:none;">
-    <div id="teacher-detail-modal">
-      <button id="close-teacher-detail">X</button>
-      <div id="teacher-detail-content"></div>
+    <div id="teacher-detail-modal" role="dialog" aria-modal="true" aria-labelledby="teacher-detail-title">
+      <div class="modal-head">
+        <h2 id="teacher-detail-title">Teacher Details</h2>
+        <button id="close-teacher-detail" class="icon-btn" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="teacher-detail-content"></div>
+      </div>
     </div>
   </div>
 
-  <!-- Hidden print section for teacher list -->
   <div id="print-list-section" style="display:none;">
-    <div id="print-list-content"></div>
+    <div id="print-list-content" class="paper"></div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
-
